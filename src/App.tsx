@@ -11,6 +11,11 @@ const App: React.FC = () => {
     setInput("");
   };
 
+  const handleRemoveItem = (index: number) => {
+    console.log("removing item...");
+    setItems(items.filter((_, i) => i !== index));
+  };
+
   return (
     <div className="w-full h-screen flex pt-20 justify-evenly">
       <div className="w-1/4 flex flex-col">
@@ -37,9 +42,20 @@ const App: React.FC = () => {
       <div className="w-1/4 flex flex-col">
         <p className="font-bold">items</p>
         <br />
-        <ul className="w-1/4 list-disc">
+        <ul className="list-disc space-y-2">
           {items.map((item, index) => (
-            <li key={index}>{item}</li>
+            <li
+              key={index}
+              className="space-x-2 flex items-center justify-between border-2 border-gray-300 rounded-lg p-2"
+            >
+              <p className="break-all">{item}</p>
+              <button
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg"
+                onClick={() => handleRemoveItem(index)}
+              >
+                remove
+              </button>
+            </li>
           ))}
         </ul>
       </div>
