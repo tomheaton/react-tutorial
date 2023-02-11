@@ -10,6 +10,14 @@ const App: React.FC = () => {
   const [input, setInput] = useState<string>("");
   const [search, setSearch] = useState<string>("");
 
+  const filteredItems = useMemo(
+    () =>
+      items.filter((item) =>
+        item.value.toLowerCase().includes(search.toLowerCase())
+      ),
+    [search, items]
+  );
+
   const handleAddItem = (e: FormEvent) => {
     e.preventDefault();
     console.log("adding item...");
@@ -30,14 +38,6 @@ const App: React.FC = () => {
       )
     );
   };
-
-  const filteredItems = useMemo(
-    () =>
-      items.filter((item) =>
-        item.value.toLowerCase().includes(search.toLowerCase())
-      ),
-    [search, items]
-  );
 
   return (
     <div className="w-full h-screen flex pt-20 justify-evenly">
