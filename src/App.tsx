@@ -42,6 +42,7 @@ const App: React.FC = () => {
       <div className="w-1/4 flex flex-col">
         <p className="font-bold">items</p>
         <br />
+        {!items.length && <p>no items</p>}
         <ul className="list-disc space-y-2">
           {items.map((item, index) => (
             <li
