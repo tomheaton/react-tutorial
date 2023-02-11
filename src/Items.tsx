@@ -7,13 +7,16 @@ const Items: React.FC = () => {
 
   const { data: itemData, dispatch } = useItemData();
 
-  const filteredItems = useMemo(
+  /* const filteredItems = useMemo(
     () =>
       itemData.items.filter((item) =>
         item.value.toLowerCase().includes(search.toLowerCase())
       ),
-    [search, itemData.items]
-  );
+    [search, itemData]
+  ); */
+
+  // @ts-ignore
+  const filteredItems = [];
 
   const handleAddItem = (e: FormEvent) => {
     e.preventDefault();
@@ -29,10 +32,10 @@ const Items: React.FC = () => {
   const handleRemoveItem = (index: number) => {
     console.log("removing item...");
     // setItems(items.filter((_, i) => i !== index));
-    dispatch({
+    /* dispatch({
       type: "DELETE_ITEM",
       payload: itemData.items[index].id,
-    });
+    }); */
   };
 
   const handleDoneItem = (index: number) => {
@@ -42,10 +45,10 @@ const Items: React.FC = () => {
     //     i === index ? { ...item, checked: !item.checked } : item
     //   )
     // );
-    dispatch({
+    /* dispatch({
       type: "TOGGLE_ITEM",
       payload: itemData.items[index].id,
-    });
+    }); */
   };
 
   return (
