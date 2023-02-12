@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 
 export type Item = {
-  id: string;
+  id: number;
   value: string;
   checked: boolean;
 };
@@ -16,8 +16,8 @@ export const initialItemState: ItemState = {
 
 type ItemAction =
   | { type: "ADD_ITEM"; payload: Item }
-  | { type: "DELETE_ITEM"; payload: string }
-  | { type: "TOGGLE_ITEM"; payload: string }
+  | { type: "DELETE_ITEM"; payload: number }
+  | { type: "TOGGLE_ITEM"; payload: number }
   | { type: "EDIT_ITEM"; payload: Pick<Item, "id" | "value"> };
 
 export const itemReducer = (state: ItemState, action: ItemAction) => {

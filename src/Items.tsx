@@ -1,54 +1,46 @@
 import { useItemData } from "@/itemReducer";
-import { useId, useMemo, useState, type FormEvent } from "react";
+import { useMemo, useState, type FormEvent } from "react";
 
 const Items: React.FC = () => {
   const [input, setInput] = useState<string>("");
   const [search, setSearch] = useState<string>("");
+  const [nextItemId, setNextItemId] = useState<number>(0);
 
   const { data: itemData, dispatch } = useItemData();
 
-  /* const filteredItems = useMemo(
+  const filteredItems = useMemo(
     () =>
       itemData.items.filter((item) =>
         item.value.toLowerCase().includes(search.toLowerCase())
       ),
     [search, itemData]
-  ); */
-
-  // @ts-ignore
-  const filteredItems = [];
+  );
 
   const handleAddItem = (e: FormEvent) => {
     e.preventDefault();
     console.log("adding item...");
-    // setItems([...items, { value: input, checked: false }]);
     dispatch({
       type: "ADD_ITEM",
-      payload: { id: useId(), value: input, checked: false },
+      payload: { id: nextItemId, value: input, checked: false },
     });
     setInput("");
+    setNextItemId((i) => i + 1);
   };
 
   const handleRemoveItem = (index: number) => {
     console.log("removing item...");
-    // setItems(items.filter((_, i) => i !== index));
-    /* dispatch({
+    dispatch({
       type: "DELETE_ITEM",
       payload: itemData.items[index].id,
-    }); */
+    });
   };
 
   const handleDoneItem = (index: number) => {
     console.log("done item...");
-    // setItems(
-    //   items.map((item, i) =>
-    //     i === index ? { ...item, checked: !item.checked } : item
-    //   )
-    // );
-    /* dispatch({
+    dispatch({
       type: "TOGGLE_ITEM",
       payload: itemData.items[index].id,
-    }); */
+    });
   };
 
   return (
