@@ -4,7 +4,7 @@ import { useMemo, useState, type FormEvent } from "react";
 const Items: React.FC = () => {
   const [input, setInput] = useState<string>("");
   const [search, setSearch] = useState<string>("");
-  const [nextItemId, setNextItemId] = useState<number>(0);
+  const [nextItemId, setNextItemId] = useState<number>(1);
 
   const { data: itemData, dispatch } = useItemData();
 
@@ -27,19 +27,19 @@ const Items: React.FC = () => {
     setNextItemId((i) => i + 1);
   };
 
-  const handleRemoveItem = (index: number) => {
+  const handleRemoveItem = (id: number) => {
     console.log("removing item...");
     dispatch({
       type: "DELETE_ITEM",
-      payload: itemData.items[index].id,
+      payload: id,
     });
   };
 
-  const handleDoneItem = (index: number) => {
+  const handleDoneItem = (id: number) => {
     console.log("done item...");
     dispatch({
       type: "TOGGLE_ITEM",
-      payload: itemData.items[index].id,
+      payload: id,
     });
   };
 
@@ -98,13 +98,13 @@ const Items: React.FC = () => {
                       ? "bg-green-500 hover:bg-green-700"
                       : "bg-orange-500 hover:bg-orange-700"
                   } text-white font-bold py-2 px-4 rounded-lg`}
-                  onClick={() => handleDoneItem(index)}
+                  onClick={() => handleDoneItem(item.id)}
                 >
                   {item.checked ? "done" : "not done"}
                 </button>
                 <button
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg"
-                  onClick={() => handleRemoveItem(index)}
+                  onClick={() => handleRemoveItem(item.id)}
                 >
                   remove
                 </button>
