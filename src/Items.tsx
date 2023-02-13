@@ -45,9 +45,6 @@ const Items: React.FC = () => {
 
   return (
     <div className="w-full h-screen flex pt-20 justify-evenly">
-      <pre>
-        <code>{JSON.stringify(itemData, null, 2)}</code>
-      </pre>
       <div className="w-1/4 flex flex-col">
         <p className="font-bold">add item</p>
         <br />
